@@ -11,5 +11,6 @@ namespace PlayerSystems
         public Vector3 MoveDirection;
         public bool Reverse;
         public Transform MeleeWeapon;
+        public int EnemiesKilled;
     }
 }

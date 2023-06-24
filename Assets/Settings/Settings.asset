@@ -20,3 +20,10 @@ MonoBehaviour:
   AmountPool: 15
   CameraOffset: {x: 5.5, y: 11.3, z: -9.5}
   CameraSmoothness: 0.07
+  Url: wss://dev.match.qubixinfinity.io/snake
+  CreateGame: create-game
+  GameCreated: game-created
+  EndGame: end-game
+  GameEnded: game-ended
+  KillEnemy: kill-enemy
+  Move: move

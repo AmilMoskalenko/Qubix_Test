@@ -8,6 +8,7 @@ namespace EnemySystems
     public class EnemyDestroySystem : IEcsRunSystem
     {
         private Config _config;
+        private Network _network;
         private EcsFilter<Player, InputData> _filter;
         private EcsFilter<Enemy> _filterEnemy;
         
@@ -36,6 +37,8 @@ namespace EnemySystems
                             player.MeleeWeapon.gameObject.SetActive(true);
                             enemy.Transform.gameObject.SetActive(false);
                             enemy.Dead = true;
+                            player.EnemiesKilled++;
+                            _network.SendDataSetup(_config.KillEnemy, _network.Id, player.EnemiesKilled);
                         }
                     }
                 }

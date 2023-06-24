@@ -1,5 +1,6 @@
 using EnemySystems;
 using Leopotam.Ecs;
+using PlayerSystems;
 using UnityEngine;
 
 namespace BulletSystems
@@ -7,8 +8,10 @@ namespace BulletSystems
     public class BulletDestroySystem : IEcsRunSystem
     {
         private Config _config;
+        private Network _network;
         private EcsFilter<Bullet> _filter;
         private EcsFilter<Enemy> _filterEnemy;
+        private EcsFilter<Player> _filterPlayer;
         
         public void Run()
         {
@@ -26,6 +29,12 @@ namespace BulletSystems
                             bullet.Transform.gameObject.SetActive(false);
                             enemy.Transform.gameObject.SetActive(false);
                             enemy.Dead = true;
+                            foreach (var k in _filterPlayer)
+                            {
+                                ref var player = ref _filterPlayer.Get1(k);
+                                player.EnemiesKilled++;
+                                _network.SendDataSetup(_config.KillEnemy, _network.Id, player.EnemiesKilled);
+                            }
                         }
                     }
                 }

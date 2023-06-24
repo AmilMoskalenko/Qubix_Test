@@ -18,6 +18,8 @@ public class EcsStartup : MonoBehaviour
     {
         _ecsWorld = new EcsWorld();
         _systems = new EcsSystems(_ecsWorld);
+
+        var network = Network.Instance;
     	
         _systems
             .Add(new PlayerInitSystem())
@@ -33,6 +35,7 @@ public class EcsStartup : MonoBehaviour
             .Add(new BorderSystem())
             .Inject(_sceneData)
             .Inject(_config)
+            .Inject(network)
             .Init();
     }
     
